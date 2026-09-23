@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio - Portal Académico{% endblock %}
+
+{% block content %}
+<div class="index-card">
+    <div class="index-icon">🎓</div>
+    <h1 class="index-title">Portal Estudiantil</h1>
+    
+    <div class="welcome-box">
+        {% if usuario_cookie %}
+            <p class="welcome-text highlight">Bienvenido nuevamente, <strong>{{ usuario_cookie }}</strong>.</p>
+        {% else %}
+            <p class="welcome-text">Bienvenido al Portal Académico.</p>
+        {% endif %}
+    </div>
+
+    <div class="index-buttons">
+        {% if session.get('usuario') %}
+            <a href="{{ url_for('cursos_view') }}" class="btn-index primary">📖 Cursos Disponibles</a>
+            <a href="{{ url_for('perfil') }}" class="btn-index secondary">👤 Mi Perfil</a>
+        {% else %}
+            <a href="{{ url_for('login') }}" class="btn-index primary">🔑 Iniciar Sesión</a>
+            <a href="{{ url_for('cursos_view') }}" class="btn-index secondary">📖 Cursos Disponibles</a>
+        {% endif %}
+    </div>
+
+    {% if usuario_cookie %}
+        <div class="cookie-action">
+            <a href="{{ url_for('eliminar_cookie') }}" class="btn-link-danger">Eliminar preferencia guardada</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
