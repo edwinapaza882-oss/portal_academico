@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Portal Académico{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=2.0">
+</head>
+<body>
+
+    <header class="navbar-top">
+        <a href="{{ url_for('index') }}" class="navbar-brand">
+            🎓 <span>Portal Académico</span>
+        </a>
+        <nav class="navbar-nav">
+            <a href="{{ url_for('index') }}">Inicio</a>
+            <a href="{{ url_for('cursos_view') }}">Cursos</a>
+            {% if session.get('usuario') %}
+                <a href="{{ url_for('perfil') }}">Perfil ({{ session['usuario'] }})</a>
+                <a href="{{ url_for('logout') }}" class="btn-nav-danger">Cerrar Sesión</a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="btn-nav-primary">Iniciar Sesión</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main class="content-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert-box alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>
