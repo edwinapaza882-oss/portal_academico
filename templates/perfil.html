@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Mi Perfil - Portal Académico{% endblock %}
+
+{% block content %}
+<div class="login-card">
+    <div class="login-icon">👤</div>
+    <h2 class="login-title">Perfil del Estudiante</h2>
+    <p class="login-subtitle">Información del usuario autenticado</p>
+
+    <div class="welcome-box">
+        <p class="welcome-text"><strong>Usuario actual:</strong> {{ usuario }}</p>
+        <p class="welcome-text" style="margin-top: 5px; color: #15803d;"><strong>Estado:</strong> Sesión Activa</p>
+    </div>
+
+    <a href="{{ url_for('logout') }}" class="btn-login" style="background-color: #ef4444; text-decoration: none; display: inline-block;">Cerrar Sesión</a>
+</div>
+{% endblock %}
